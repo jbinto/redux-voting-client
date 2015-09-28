@@ -6,9 +6,27 @@ I am following [@teropa](https://twitter.com/teropa)'s "[Full-Stack Redux Tutori
 
 ## Usage
 
+### Hot loading in the browser
+
 ```
 webpack-dev-server
 open http://localhost:8080
+```
+
+### Run tests
+
+```
+npm run test:watch
+```
+
+### Debug tests
+
+Add `debugger` statements to tests. Then,
+
+```
+node-inspector --web-port 1234
+npm run test:watch:debug
+open http://127.0.0.1:1234/?ws=127.0.0.1:1234&port=5858
 ```
 
 ## Notes
