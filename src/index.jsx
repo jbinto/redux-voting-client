@@ -1,5 +1,6 @@
 import React from 'react';
 import Voting from './components/Voting';
+// import store from './store'
 
 // This works because
 // 1) webpack-css-loader
@@ -8,7 +9,13 @@ require('./style.css');
 
 const pair = ['Toronto', 'Calgary'];
 
+// XXX
+const vote = (entry) => {
+  // store.dispatch({type: 'VOTE', entry})
+  // ?? how to set hasVoted ??
+}
+
 React.render(
-  <Voting pair={pair} />,
+  <Voting pair={pair} votedFor="Toronto" vote={vote} />,
   document.getElementById('app')
 );
