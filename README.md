@@ -23,3 +23,7 @@ Dependencies introduced:
 * https://github.com/passy/autoprefixer-loader
 
 TODO: Update `Results.jsx`, `Vote.jsx`, `Index.jsx` with presentation logic (found in above commit)
+
+* ~~`mocha` won't automatically reload `.jsx` files in `test/components` when called with `--watch`. It does call these tests manually, it's just not watching the files. grr.~~
+
+**FIXED:** Specify `--watch-extensions jsx` on the `test:watch` scrpit.
