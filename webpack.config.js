@@ -20,6 +20,8 @@ module.exports = {
         loader: 'react-hot!babel' // react-hot-loader
       },
       {
+        // css-loader: https://github.com/webpack/css-loader
+        // style-loader: https://github.com/webpack/style-loader
         // autoprefixer-loader: https://github.com/passy/autoprefixer-loader#usage
         test: /.css$/,
         loader: 'style!css!autoprefixer?browsers=last 2 versions'

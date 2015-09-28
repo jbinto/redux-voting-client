@@ -13,7 +13,7 @@ export default React.createClass({
     return <div className="voting">
       {this.getPair().map(entry =>
         <button key={entry}>
-          <h1>{entry}</h1>
+          <h1>Vote {entry}</h1>
         </button>
       )}
     </div>;
