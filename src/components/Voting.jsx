@@ -1,5 +1,10 @@
 import React from 'react';
 
+// This is a "[dumb|pure] component".
+// 
+// "The components don't try to do much about those actions themselves.
+//  They merely invoke callback props."
+
 export default React.createClass({
   getPair: function() {
     return this.props.pair || [];
@@ -12,7 +17,8 @@ export default React.createClass({
 
     return <div className="voting">
       {this.getPair().map(entry =>
-        <button key={entry}>
+        <button key={entry}
+                onClick={() => this.props.vote(entry)}>
           <h1>{entry}</h1>
         </button>
       )}

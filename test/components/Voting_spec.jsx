@@ -4,7 +4,11 @@ import {expect} from 'chai';
 
 // ES6 object destructuring
 // https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
-const {renderIntoDocument, scryRenderedDOMComponentsWithTag} = React.addons.TestUtils;
+const {
+  renderIntoDocument,
+  scryRenderedDOMComponentsWithTag,
+  Simulate
+} = React.addons.TestUtils;
 
 describe('Voting', () => {
 
@@ -26,5 +30,29 @@ describe('Voting', () => {
 
 
   });
+
+  it('invokes callback when a button is clicked', () => {
+    // This is a "[dumb|pure] component".
+    // "The components don't try to do much about those actions themselves.
+    //  They merely invoke callback props."
+
+    // set up a spy callback
+    let votedFor;
+    const vote = (entry) => votedFor = entry;
+
+    const component = renderIntoDocument(
+      <Voting pair={['Toronto', 'Chicago']}
+              vote={vote} />
+
+    );
+
+    const buttons = scryRenderedDOMComponentsWithTag(component, "button");
+
+    // https://facebook.github.io/react/docs/test-utils.html
+    Simulate.click(buttons[0].getDOMNode());
+
+    expect(votedFor).to.equal('Toronto');
+
+  })
 
 });
