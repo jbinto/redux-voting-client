@@ -1,0 +1,19 @@
+{
+  "name": "redux-voting-client",
+  "version": "1.0.0",
+  "description": "This is a React / Redux frontend for [jbinto/redux-voting-server](https://github.com/jbinto/redux-voting-server).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jbinto/redux-voting-client.git"
+  },
+  "author": "Jesse Buchanan <hello@jessebuchanan.ca> (https://jessebuchanan.ca)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jbinto/redux-voting-client/issues"
+  },
+  "homepage": "https://github.com/jbinto/redux-voting-client#readme"
+}
