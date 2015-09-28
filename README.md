@@ -6,4 +6,7 @@ I am following [@teropa](https://twitter.com/teropa)'s "[Full-Stack Redux Tutori
 
 ## Usage
 
-TODO
+```
+webpack-dev-server
+open http://localhost:8080
+```
