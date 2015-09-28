@@ -23,8 +23,13 @@ export default React.createClass({
     // 2) React concept: key
     //    https://facebook.github.io/react/docs/multiple-components.html#dynamic-children
 
+    // XXX: The two ternary operators below are a huge code smell.
+    // I feel like we need a JSX builder.
+
     return <div className="voting">
-      {this.getPair().map(entry =>
+      {this.props.winner ?
+        <div ref="winner">{this.props.winner} has won!</div> :
+        this.getPair().map(entry =>
         <button key={entry}
                 disabled={this.isDisabled()}
                 onClick={() => this.props.vote(entry)}>
@@ -35,5 +40,6 @@ export default React.createClass({
         </button>
       )}
     </div>;
+
   }
 });
