@@ -14,3 +14,10 @@ open http://localhost:8080
 ## Notes
 
 * CSS taken verbatim from [this commit](https://github.com/teropa/redux-voting-client/commit/css)
+
+Dependencies introduced:
+
+* https://github.com/JedWatson/classnames
+* https://github.com/webpack/css-loader
+* https://github.com/webpack/style-loader
+* https://github.com/passy/autoprefixer-loader
