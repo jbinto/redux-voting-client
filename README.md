@@ -21,3 +21,5 @@ Dependencies introduced:
 * https://github.com/webpack/css-loader
 * https://github.com/webpack/style-loader
 * https://github.com/passy/autoprefixer-loader
+
+TODO: Update `Results.jsx`, `Vote.jsx`, `Index.jsx` with presentation logic (found in above commit)
