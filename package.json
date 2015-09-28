@@ -4,7 +4,8 @@
   "description": "This is a React / Redux frontend for [jbinto/redux-voting-server](https://github.com/jbinto/redux-voting-server).",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js 'test/**/*.@(js|jsx)'",
+    "test:watch": "npm run test -- watch"
   },
   "repository": {
     "type": "git",
