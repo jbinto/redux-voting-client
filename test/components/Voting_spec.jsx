@@ -12,6 +12,9 @@ const {
 
 describe('Voting', () => {
 
+  // I couldn't take the constant typing. DRYer this way and lambda syntax is terse.
+  const getButtons = (component) => scryRenderedDOMComponentsWithTag(component, "button");
+
   it('renders a pair of buttons', () => {
     const component = renderIntoDocument(
       <Voting pair={['Toronto', 'Chicago']} />
@@ -22,7 +25,7 @@ describe('Voting', () => {
     //  "Finds all instances of components in the rendered tree that are DOM components with the tag name matching tagName."
     //  https://facebook.github.io/react/docs/test-utils.html#scryrendereddomcomponentswithtag
 
-    const buttons = scryRenderedDOMComponentsWithTag(component, "button");
+    const buttons = getButtons(component);
 
     expect(buttons.length).to.equal(2);
     expect(buttons[0].getDOMNode().textContent).to.equal('Toronto');
@@ -46,13 +49,38 @@ describe('Voting', () => {
 
     );
 
-    const buttons = scryRenderedDOMComponentsWithTag(component, "button");
+    const buttons = getButtons(component);
 
     // https://facebook.github.io/react/docs/test-utils.html
     Simulate.click(buttons[0].getDOMNode());
 
     expect(votedFor).to.equal('Toronto');
 
-  })
+  });
+
+  it('disables buttons when user has voted', () => {
+    const component = renderIntoDocument(
+      <Voting pair={['Toronto', 'Chicago']} votedFor="Chicago" />
+    );
+
+    const buttons = getButtons(component);
+    expect(buttons.length).to.equal(2);
+
+    const isDisabled = (b) => b.getDOMNode().hasAttribute('disabled');
+    buttons.forEach((b) => {
+      expect(isDisabled(b)).to.be.true;
+    });
+
+  });
+
+  it('adds label to voted entry', () => {
+    const component = renderIntoDocument(
+      <Voting pair={['Toronto', 'Chicago']} votedFor="Chicago" />
+    );
+
+    const buttons = getButtons(component);
+    const labelText = buttons[1].getDOMNode().textContent;
+    expect(labelText).to.contain('Voted');
+  });
 
 });
