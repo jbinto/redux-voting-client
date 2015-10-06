@@ -3,6 +3,7 @@ import React from 'react';
 import Router, {Route, DefaultRoute} from 'react-router';
 import App from './components/App';
 import Voting from './components/Voting';
+import Results from './components/Results'
 // import store from './store'
 
 // This works because
@@ -12,6 +13,7 @@ require('./style.css');
 
 const routes = (
   <Route handler={App}>
+    <Route path="/results" handler={Results} />
     <DefaultRoute handler={Voting} />
   </Route>
 );
