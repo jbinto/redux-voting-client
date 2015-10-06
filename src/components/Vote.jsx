@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react/addons';
 import classNames from 'classnames';
 
 // This is a "[dumb|pure] component".
@@ -7,6 +7,7 @@ import classNames from 'classnames';
 //  They merely invoke callback props."
 
 export default React.createClass({
+  mixins: [React.addons.pureRenderMixin],
   getPair: function() {
     return this.props.pair || [];
   },

@@ -1,6 +1,7 @@
-import React from 'react';
+import React from 'react/addons';
 
 export default React.createClass({
+  mixins: [React.addons.PureRenderMixin],
   render: function() {
     // XXX: className?
     // https://facebook.github.io/react/docs/class-name-manipulation.html
