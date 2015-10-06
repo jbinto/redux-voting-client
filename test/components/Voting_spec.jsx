@@ -99,4 +99,25 @@ describe('Voting', () => {
 
   });
 
+  it('renders as a pure component (no deep equality checking)', () => {
+    const pair = ['Toronto', 'Chicago'];
+    const component = renderIntoDocument(
+      <Voting pair={pair} />
+    );
+
+    let getFirstButtonText = (component) =>
+      getButtons(component)[0].getDOMNode().textContent;
+
+    expect(getFirstButtonText(component)).to.equal('Toronto');
+
+    // Now mutate the initial array.
+    // Normally, React will re-render, even when deep values are changed.
+    // With PureRenderMixin, only reference equality is checked.
+
+    pair[0] = 'New York';
+    component.setProps({pair: pair});
+    expect(getFirstButtonText(component)).to.equal('Toronto');
+
+  });
+
 });
