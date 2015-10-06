@@ -1,3 +1,4 @@
+import {List} from 'immutable';
 import Voting from '../../src/components/Voting';
 import React from 'react/addons';
 import {expect} from 'chai';
@@ -119,5 +120,27 @@ describe('Voting', () => {
     expect(getFirstButtonText(component)).to.equal('Toronto');
 
   });
+
+  it('does re-render when you pass it a different immutable list)', () => {
+    const pair = List(['Toronto', 'Chicago']);
+    const component = renderIntoDocument(
+      <Voting pair={pair} />
+    );
+
+    let getFirstButtonText = (component) =>
+      getButtons(component)[0].getDOMNode().textContent;
+
+    expect(getFirstButtonText(component)).to.equal('Toronto');
+
+    // Now mutate the initial array.
+    // Normally, React will re-render, even when deep values are changed.
+    // With PureRenderMixin, only reference equality is checked.
+
+    let newPair = pair.set(0, 'New York');
+    component.setProps({pair: newPair});
+    expect(getFirstButtonText(component)).to.equal('New York');
+
+  });
+
 
 });
