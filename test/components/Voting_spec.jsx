@@ -80,7 +80,23 @@ describe('Voting', () => {
 
     const buttons = getButtons(component);
     const labelText = buttons[1].getDOMNode().textContent;
+
+    // textContent is basically innerHTML but strips all tags;
+    //  would be 'ChicagoVoted'
     expect(labelText).to.contain('Voted');
+  });
+
+
+  it('renders just the winner when there is one', () => {
+    const component = renderIntoDocument(
+      <Voting pair={['Toronto', 'Chicago']} winner="Chicago" />
+    );
+
+    const label = component.refs.winner;
+    const text = label.getDOMNode().textContent;
+
+    expect(text).to.equal('Winner is Chicago!');
+
   });
 
 });

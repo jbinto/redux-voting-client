@@ -16,6 +16,6 @@ const vote = (entry) => {
 }
 
 React.render(
-  <Voting pair={pair} votedFor="Calgary" vote={vote} />,
+  <Voting pair={pair} winner="Toronto" vote={vote} />,
   document.getElementById('app')
 );
