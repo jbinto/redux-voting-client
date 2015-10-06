@@ -29,7 +29,7 @@ npm run test:watch:debug
 open http://127.0.0.1:1234/?ws=127.0.0.1:1234&port=5858
 ```
 
-## Notes
+## Notes / gripes / questions
 
 * CSS taken verbatim from [this commit](https://github.com/teropa/redux-voting-client/commit/css)
 
@@ -45,3 +45,5 @@ TODO: Update `Results.jsx`, `Vote.jsx`, `Index.jsx` with presentation logic (fou
 * ~~`mocha` won't automatically reload `.jsx` files in `test/components` when called with `--watch`. It does call these tests manually, it's just not watching the files. grr.~~
 
 **FIXED:** Specify `--watch-extensions jsx` on the `test:watch` scrpit.
+
+* Hot reloading doesn't work on `index.jsx`. This is a known issue, as per [react-hot-loader troubleshooting](https://github.com/gaearon/react-hot-loader/blob/master/docs/Troubleshooting.md#the-following-modules-couldnt-be-hot-updated-they-would-need-a-full-reload). Basically, you can't hot-reload the root component, which is currently `index.jsx`. Instead, you should wrap everything in a top-level App component, which never changes. (I believe this is going to be required when we introduce `react-router` shortly anyhow.)
