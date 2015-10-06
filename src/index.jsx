@@ -1,4 +1,7 @@
 import React from 'react';
+// never seen these 2 import syntaxes mixed.
+import Router, {Route, DefaultRoute} from 'react-router';
+import App from './components/App';
 import Voting from './components/Voting';
 // import store from './store'
 
@@ -7,7 +10,12 @@ import Voting from './components/Voting';
 // 2) we're in a JSX file, so the output (??)
 require('./style.css');
 
-const pair = ['Toronto', 'Calgary'];
+const routes = (
+  <Route handler={App}>
+    <DefaultRoute handler={Voting} />
+  </Route>
+);
+
 
 // XXX
 const vote = (entry) => {
@@ -15,7 +23,12 @@ const vote = (entry) => {
   // ?? how to set hasVoted ??
 }
 
-React.render(
-  <Voting pair={pair} vote={vote} />,
-  document.getElementById('app')
-);
+// react-router gives us a Root component (class, not instance)
+// then we send it to React.render, telling it where to mount.
+Router.run(routes, (Root) => {
+  console.log("index.jsx Router.run called");
+  React.render(
+    <Root />,
+    document.getElementById('app')
+  );
+})
