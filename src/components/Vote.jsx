@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 
 // This is a "[dumb|pure] component".
 //
@@ -26,10 +27,11 @@ export default React.createClass({
       {this.getPair().map(entry =>
         <button key={entry}
                 disabled={this.isDisabled()}
+                className={classNames({ voted: this.hasVotedFor(entry) })}
                 onClick={() => this.props.vote(entry)}>
           <h1>{entry}</h1>
           {this.hasVotedFor(entry)
-            ? <div className="label">Voted</div> 
+            ? <div className="label">Voted</div>
             : null
           }
         </button>
