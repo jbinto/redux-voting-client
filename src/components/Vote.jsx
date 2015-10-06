@@ -29,7 +29,7 @@ export default React.createClass({
                 onClick={() => this.props.vote(entry)}>
           <h1>{entry}</h1>
           {this.hasVotedFor(entry)
-            ? <div class="label">Voted</div> 
+            ? <div className="label">Voted</div> 
             : null
           }
         </button>
