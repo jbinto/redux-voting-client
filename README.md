@@ -46,4 +46,10 @@ TODO: Update `Results.jsx`, `Vote.jsx`, `Index.jsx` with presentation logic (fou
 
 **FIXED:** Specify `--watch-extensions jsx` on the `test:watch` scrpit.
 
-* Hot reloading doesn't work on `index.jsx`. This is a known issue, as per [react-hot-loader troubleshooting](https://github.com/gaearon/react-hot-loader/blob/master/docs/Troubleshooting.md#the-following-modules-couldnt-be-hot-updated-they-would-need-a-full-reload). Basically, you can't hot-reload the root component, which is currently `index.jsx`. Instead, you should wrap everything in a top-level App component, which never changes. (I believe this is going to be required when we introduce `react-router` shortly anyhow.)
+* **Gripe:** Hot reloading doesn't work on `index.jsx`. This is a known issue, as per [react-hot-loader troubleshooting](https://github.com/gaearon/react-hot-loader/blob/master/docs/Troubleshooting.md#the-following-modules-couldnt-be-hot-updated-they-would-need-a-full-reload). Basically, you can't hot-reload the root component, which is currently `index.jsx`. Instead, you should wrap everything in a top-level App component, which never changes. (I believe this is going to be required when we introduce `react-router` shortly anyhow.)
+
+* **Major gripe:** `WrongDocumentError` keeps happening on failing tests after calling `setProps`. To reproduce, run `npm run test:watch`, then comment out the `PureRenderMixin`. Instead of getting a friendly items-not-equal error message, it throws from deep inside of a React/jsdom callstack. Google shows that there's some memoization/caching going on inside require.js/react, state is leaked between tests, and some horrible boilerplate is required to un-require/re-require React before each test.
+
+I made a more detailed comment on the original tutorial here:
+
+http://teropa.info/blog/2015/09/10/full-stack-redux-tutorial.html#comment-2293506605
