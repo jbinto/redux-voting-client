@@ -103,9 +103,16 @@ describe('Voting', () => {
   });
 
   it('renders as a pure component (no deep equality checking)', () => {
+    // note: As of React 0.14 `setProps` is deprecated.
+    // Instead of using renderIntoDocument, render into a div,
+    // then explicitly call ReactDOM.render with different props.
+    // See http://stackoverflow.com/a/30616091/19779
+
+    const node = document.createElement('div');
     const pair = ['Toronto', 'Chicago'];
-    const component = renderIntoDocument(
-      <Voting pair={pair} />
+    const component = ReactDOM.render(
+      <Voting pair={pair} />,
+      node
     );
 
     let getFirstButtonText = (component) =>
@@ -118,15 +125,22 @@ describe('Voting', () => {
     // With PureRenderMixin, only reference equality is checked.
 
     pair[0] = 'New York';
-    component.setProps({pair: pair});
+
+    ReactDOM.render(
+      <Voting pair={pair} />,
+      node
+    )
+
     expect(getFirstButtonText(component)).to.equal('Toronto');
 
   });
 
   it('does re-render when you pass it a different immutable list)', () => {
+    const node = document.createElement('div');
     const pair = List(['Toronto', 'Chicago']);
-    const component = renderIntoDocument(
-      <Voting pair={pair} />
+    const component = ReactDOM.render(
+      <Voting pair={pair} />,
+      node
     );
 
     let getFirstButtonText = (component) =>
@@ -139,7 +153,10 @@ describe('Voting', () => {
     // With PureRenderMixin, only reference equality is checked.
 
     let newPair = pair.set(0, 'New York');
-    component.setProps({pair: newPair});
+    ReactDOM.render(
+      <Voting pair={newPair} />,
+      node
+    )
     expect(getFirstButtonText(component)).to.equal('New York');
 
   });
