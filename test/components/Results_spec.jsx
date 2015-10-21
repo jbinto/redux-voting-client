@@ -34,4 +34,24 @@ describe('Results', () => {
 
   });
 
-});
+  it('invokes the next callback when the next button is clicked', () => {
+    // closures are neat... right?
+    let nextInvoked = false;
+    const next = () => nextInvoked = true;
+
+    const pair = List.of('Toronto', 'Chicago');
+    const component = renderIntoDocument(
+      <Results pair={pair}
+               tally={Map()}
+               next={next}
+      />
+    );
+
+    // Simulate clicking the `next` button...
+    Simulate.click(ReactDOM.findDOMNode(component.refs.next));
+
+    expect(nextInvoked).to.equal(true);
+
+  });
+
+}); // describe Results
