@@ -1,6 +1,8 @@
 import {List} from 'immutable';
 import Voting from '../../src/components/Voting';
-import React from 'react/addons';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import TestUtils from 'react-addons-test-utils';
 import {expect} from 'chai';
 
 // ES6 object destructuring
@@ -9,7 +11,7 @@ const {
   renderIntoDocument,
   scryRenderedDOMComponentsWithTag,
   Simulate
-} = React.addons.TestUtils;
+} = TestUtils;
 
 describe('Voting', () => {
 
@@ -29,8 +31,8 @@ describe('Voting', () => {
     const buttons = getButtons(component);
 
     expect(buttons.length).to.equal(2);
-    expect(buttons[0].getDOMNode().textContent).to.equal('Toronto');
-    expect(buttons[1].getDOMNode().textContent).to.equal('Chicago');
+    expect(buttons[0].textContent).to.equal('Toronto');
+    expect(buttons[1].textContent).to.equal('Chicago');
 
 
   });
@@ -53,7 +55,7 @@ describe('Voting', () => {
     const buttons = getButtons(component);
 
     // https://facebook.github.io/react/docs/test-utils.html
-    Simulate.click(buttons[0].getDOMNode());
+    Simulate.click(buttons[0]);
 
     expect(votedFor).to.equal('Toronto');
 
@@ -67,7 +69,7 @@ describe('Voting', () => {
     const buttons = getButtons(component);
     expect(buttons.length).to.equal(2);
 
-    const isDisabled = (b) => b.getDOMNode().hasAttribute('disabled');
+    const isDisabled = (b) => b.hasAttribute('disabled');
     buttons.forEach((b) => {
       expect(isDisabled(b)).to.be.true;
     });
@@ -80,7 +82,7 @@ describe('Voting', () => {
     );
 
     const buttons = getButtons(component);
-    const labelText = buttons[1].getDOMNode().textContent;
+    const labelText = buttons[1].textContent;
 
     // textContent is basically innerHTML but strips all tags;
     //  would be 'ChicagoVoted'
@@ -94,7 +96,7 @@ describe('Voting', () => {
     );
 
     const label = component.refs.winner;
-    const text = label.getDOMNode().textContent;
+    const text = ReactDOM.findDOMNode(label).textContent;
 
     expect(text).to.equal('Winner is Chicago!');
 
@@ -107,7 +109,7 @@ describe('Voting', () => {
     );
 
     let getFirstButtonText = (component) =>
-      getButtons(component)[0].getDOMNode().textContent;
+      getButtons(component)[0].textContent;
 
     expect(getFirstButtonText(component)).to.equal('Toronto');
 
@@ -128,7 +130,7 @@ describe('Voting', () => {
     );
 
     let getFirstButtonText = (component) =>
-      getButtons(component)[0].getDOMNode().textContent;
+      getButtons(component)[0].textContent;
 
     expect(getFirstButtonText(component)).to.equal('Toronto');
 

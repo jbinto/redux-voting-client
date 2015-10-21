@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 // never seen these 2 import syntaxes mixed.
 import Router, {Route, DefaultRoute} from 'react-router';
 import App from './components/App';
@@ -29,7 +30,7 @@ const vote = (entry) => {
 // then we send it to React.render, telling it where to mount.
 Router.run(routes, (Root) => {
   console.log("index.jsx Router.run called");
-  React.render(
+  ReactDOM.render(
     <Root />,
     document.getElementById('app')
   );
