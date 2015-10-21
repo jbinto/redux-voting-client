@@ -54,4 +54,19 @@ describe('Results', () => {
 
   });
 
+  it('renders the winner if there is one', () => {
+    const component = renderIntoDocument(
+      <Results winner="Toronto"
+               pair={['Toronto', 'Chicago']}
+               tally={Map()}
+      />
+    );
+
+    const winner = ReactDOM.findDOMNode(component.refs.winner);
+    expect(winner).to.be.ok;   // ok ~== truthy (ugh, chai)
+    expect(winner.textContent).to.contain('Toronto');
+
+
+  });
+
 }); // describe Results
