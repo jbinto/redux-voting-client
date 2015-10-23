@@ -10,7 +10,7 @@ import {createStore} from 'redux';
 // http://teropa.info/blog/2015/09/10/full-stack-redux-tutorial.html#getting-data-in-from-redux-to-react
 import {Provider} from 'react-redux';
 
-import {io} from 'socket.io-client';
+import io from 'socket.io-client';
 
 import reducer from './reducer'
 import App from './components/App';
@@ -34,6 +34,8 @@ store.dispatch({
     }
   }
 });
+
+const socket = io.connect(`${location.protocol}//${location.hostname}:8090`);
 
 const routes = (
   <Route component={App}>
