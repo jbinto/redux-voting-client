@@ -1,9 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Route, Router} from 'react-router';
+import {createStore} from 'redux';
+
+// "The big idea of react-redux is to take our pure components
+//  and wire them up into a Redux Store by doing two things:
+//  * Mapping the Store state into component input props.
+//  * Mapping actions into component output callback props."
+// http://teropa.info/blog/2015/09/10/full-stack-redux-tutorial.html#getting-data-in-from-redux-to-react
+import {Provider} from 'react-redux';
+
+import reducer from './reducer'
 import App from './components/App';
-import Voting from './components/Voting';
-import Results from './components/Results'
+import {VotingContainer} from './components/Voting';
+import {ResultsContainer} from './components/Results';
 // import store from './store'
 
 // This works because
@@ -11,14 +21,30 @@ import Results from './components/Results'
 // 2) we're in a JSX file, so the output (??)
 require('./style.css');
 
+// https://github.com/rackt/redux/blob/master/docs/api/createStore.md
+const store = createStore(reducer);
+store.dispatch({
+  type: 'SET_STATE',
+  state: {
+    vote: {
+      pair: ['New York', 'Toronto'],
+      tally: {'Toronto': 4}
+    }
+  }
+});
+
 const routes = (
   <Route component={App}>
-    <Route path="/results" component={Results} />
-    <Route path="/" component={Voting} />
+    <Route path="/results" component={ResultsContainer} />
+    <Route path="/" component={VotingContainer} />
   </Route>
 );
 
+
 ReactDOM.render(
-  <Router>{routes}</Router>,
+  // https://github.com/rackt/react-redux/blob/master/docs/api.md#provider-store
+  <Provider store={store}>
+    <Router>{routes}</Router>
+  </Provider>,
   document.getElementById('app')
 );
