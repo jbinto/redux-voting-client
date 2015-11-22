@@ -25,17 +25,12 @@ require('./style.css');
 
 // https://github.com/rackt/redux/blob/master/docs/api/createStore.md
 const store = createStore(reducer);
-store.dispatch({
-  type: 'SET_STATE',
-  state: {
-    vote: {
-      pair: ['New York', 'Toronto'],
-      tally: {'Toronto': 4}
-    }
-  }
-});
 
 const socket = io.connect(`${location.protocol}//${location.hostname}:8090`);
+socket.on('state', state => {
+  store.dispatch({type: 'SET_STATE', state});
+});
+
 
 const routes = (
   <Route component={App}>
