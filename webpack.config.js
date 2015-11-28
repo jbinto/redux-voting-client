@@ -25,6 +25,11 @@ module.exports = {
         // autoprefixer-loader: https://github.com/passy/autoprefixer-loader#usage
         test: /.css$/,
         loader: 'style!css!autoprefixer?browsers=last 2 versions'
+      },
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        loader: 'eslint-loader'
       }
     ]
   },
