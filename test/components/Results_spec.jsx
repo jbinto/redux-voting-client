@@ -57,7 +57,7 @@ describe('Results', () => {
   it('renders the winner if there is one', () => {
     const component = renderIntoDocument(
       <Results winner="Toronto"
-               pair={['Toronto', 'Chicago']}
+               pair={List.of('Toronto', 'Chicago')}
                tally={Map()}
       />
     );

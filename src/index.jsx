@@ -12,7 +12,7 @@ import {Provider} from 'react-redux';
 
 import io from 'socket.io-client';
 
-import reducer from './reducer'
+import reducer from './reducer';
 import App from './components/App';
 import {VotingContainer} from './components/Voting';
 import {ResultsContainer} from './components/Results';
