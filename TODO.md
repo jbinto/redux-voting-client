@@ -14,4 +14,5 @@
   * Curry the socket into `applyMiddleware` so it can access it
   * Emit `action` event from middleware
   * Prevent `SET_STATE` infinite loop by including `remote:true` metadata
+  * Implement `NEXT` remote action
 * Exercises
