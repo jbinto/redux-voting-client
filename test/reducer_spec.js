@@ -82,7 +82,7 @@ describe('reducer', () => {
     const state = fromJS({
       vote: {
         pair: ['Toronto', 'Kansas'],
-        tally: { 'Toronto': 5 }
+        tally: { 'Toronto': 5 },
       },
     });
 
@@ -95,6 +95,30 @@ describe('reducer', () => {
 
     expect(nextState).to.equal(state);
 
+  });
+
+  it('clears votedFor when a new pair comes in via SET_STATE', () => {
+    const state = fromJS({
+      vote: {
+        pair: ['Toronto', 'Kansas'],
+        tally: { 'Toronto': 5 }
+      },
+      votedFor: 'Toronto'
+    })
+
+    const stateFromServer = fromJS({
+      vote: {
+        pair: ['Los Angeles', 'Memphis'],
+      }
+    });
+
+    const action = {
+      type: 'SET_STATE',
+      state: stateFromServer,
+    }
+
+    const nextState = reducer(state, action);
+    expect(nextState).to.equal(stateFromServer);
   });
 
 });
