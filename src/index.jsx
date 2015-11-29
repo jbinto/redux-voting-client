@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Route, Router} from 'react-router';
-import {createStore} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
 import {setState} from './action_creators';
+import remoteActionMiddleware from './remote_action_middleware';
 
 // "The big idea of react-redux is to take our pure components
 //  and wire them up into a Redux Store by doing two things:
@@ -24,8 +25,13 @@ import {ResultsContainer} from './components/Results';
 // 2) we're in a JSX file, so the output (??)
 require('./style.css');
 
+// Using applyMiddleware gives us a new `createStore` function
+const createStoreWithMiddleware = applyMiddleware(
+  remoteActionMiddleware
+)(createStore);
+
 // https://github.com/rackt/redux/blob/master/docs/api/createStore.md
-const store = createStore(reducer);
+const store = createStoreWithMiddleware(reducer);
 
 const socket = io.connect(`${location.protocol}//${location.hostname}:8090`);
 socket.on('state', state => {
