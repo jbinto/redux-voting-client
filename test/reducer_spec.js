@@ -50,4 +50,51 @@ describe('reducer', () => {
 
   });
 
+  it('handles VOTE by setting votedFor', () => {
+    const state = fromJS({
+      vote: {
+        pair: ['Toronto', 'Kansas'],
+        tally: { 'Toronto': 5 }
+      },
+    });
+
+    const action = {
+      type: 'VOTE',
+      entry: 'Kansas'
+    };
+
+    const nextState = reducer(state, action);
+
+    expect(nextState).to.equal(fromJS({
+      vote: {
+        pair: ['Toronto', 'Kansas'],
+        // XXX: The client side reducer does NOT increment the tally.
+        // It only sets `votedFor`. Async actions will do the rest.
+        tally: { 'Toronto': 5 }
+      },
+      votedFor: 'Kansas'
+    }));
+
+  });
+
+
+  it('does not do anything when getting VOTE for invalid entry', () => {
+    const state = fromJS({
+      vote: {
+        pair: ['Toronto', 'Kansas'],
+        tally: { 'Toronto': 5 }
+      },
+    });
+
+    const action = {
+      type: 'VOTE',
+      entry: 'Chicago'
+    };
+
+    const nextState = reducer(state, action);
+
+    expect(nextState).to.equal(state);
+
+  });
+
 });
