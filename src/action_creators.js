@@ -3,11 +3,11 @@ export function setState(state) {
     type: 'SET_STATE',
     state,
   };
-};
+}
 
 export function vote(entry) {
   return {
     type: 'VOTE',
-    entry
-  }
-};
+    entry,
+  };
+}
