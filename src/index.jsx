@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Route, Router} from 'react-router';
 import {createStore} from 'redux';
+import {setState} from './action_creators';
 
 // "The big idea of react-redux is to take our pure components
 //  and wire them up into a Redux Store by doing two things:
@@ -28,7 +29,7 @@ const store = createStore(reducer);
 
 const socket = io.connect(`${location.protocol}//${location.hostname}:8090`);
 socket.on('state', state => {
-  store.dispatch({type: 'SET_STATE', state});
+  store.dispatch(setState(state));
 });
 
 

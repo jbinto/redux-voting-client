@@ -30,6 +30,7 @@ function mapStateToProps(state) {
   return {
     // getIn: https://facebook.github.io/immutable-js/docs/#/Iterable/getIn
     pair: state.getIn(['vote', 'pair']),
+    votedFor: state.get('votedFor'),
     winner: state.get('winner'),
   };
 }
