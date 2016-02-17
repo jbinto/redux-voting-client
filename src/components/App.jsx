@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 
 export default React.createClass({
   propTypes: {
-    children: PropTypes.array.isRequired,
+    children: PropTypes.any.isRequired,
   },
   render: function render() {
     // Now that we're using connected components (<VotingContainer> etc)

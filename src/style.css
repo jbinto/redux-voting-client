@@ -22,7 +22,7 @@ body {
 .voting button {
   flex: 1 0 0;
 
-  background-color: #673AB7;
+  background-color: #67FFFF;
   border-width: 0;
 }
 .voting button:first-child {

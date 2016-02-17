@@ -26,10 +26,6 @@ import {ResultsContainer} from './components/Results';
 require('./style.css');
 
 const socket = io.connect(`${location.protocol}//${location.hostname}:8090`);
-socket.on('state', state => {
-  store.dispatch(setState(state));
-});
-
 
 // Using applyMiddleware gives us a new `createStore` function
 const createStoreWithMiddleware = applyMiddleware(
@@ -38,6 +34,10 @@ const createStoreWithMiddleware = applyMiddleware(
 
 // https://github.com/rackt/redux/blob/master/docs/api/createStore.md
 const store = createStoreWithMiddleware(reducer);
+
+socket.on('state', state => {
+  store.dispatch(setState(state));
+});
 
 const routes = (
   <Route component={App}>

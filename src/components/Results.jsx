@@ -2,11 +2,12 @@ import React, { PropTypes } from 'react';
 import {connect} from 'react-redux';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import Winner from '../components/Winner';
+import * as actionCreators from '../action_creators';
 
 export const Results = React.createClass({
   propTypes: {
-    pair: PropTypes.any.isRequired, // Immutable? array
-    tally: PropTypes.any.isRequired, // Immutable? map
+    pair: PropTypes.any, // Immutable or plain array
+    tally: PropTypes.any, // Immutable or plain map
     winner: PropTypes.string,
     next: PropTypes.func,
   },
@@ -55,4 +56,7 @@ function mapStateToProps(state) {
   };
 }
 
-export const ResultsContainer = connect(mapStateToProps)(Results);
+export const ResultsContainer = connect(
+  mapStateToProps,
+  actionCreators    // still in awe of this pattern
+)(Results);
